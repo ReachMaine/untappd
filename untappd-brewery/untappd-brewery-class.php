@@ -74,10 +74,8 @@ class UTB_untappd {
     public function breweryBeers($breweryId, $since = '', $offset = '', $limit = '')
     {
         if (empty($breweryId)) {
-
             echo 'breweryId parameter must be set and not empty';
         }
-        echo "BreweryId is:".$breweryId;
         $args = array(
             'since'  => $since,
             'offset' => $offset,
