@@ -43,8 +43,8 @@ function utb_output($id, $feedtype, $limit){
     //echo "feed: <pre style='color:black;'>"; var_dump($feed); echo "</pre>";
     if ($id != '' && $feed != '') {
         if($feedtype == 'breweryBeers' && $id != ''){
-            $output .= '<div class="untappdbreweryfeed" >';
-                $output .= '<div class="untappdbreweryheading">';
+            $output .= '<div class="untappdbrewery brewerybeers" >';
+                /*  not sure we need this since on the site. $output .= '<div class="untappdbreweryheading">';
                     $output .= '<div class="untappdbrewerypic">';
                         $output .= '<a href="' . $feed->response->brewery->contact->url . '">';
                             $output .= '<img src="' . $feed->response->brewery->brewery_label . '" alt="' . $feed->response->checkins->items[0]->brewery->brewery_name . '" />';
@@ -56,36 +56,38 @@ function utb_output($id, $feedtype, $limit){
                             $output .= $feed->response->brewery->brewery_name;
                         $output .= '</a>';
                     $output .= '</div>';
-                $output .= '</div>';
-                $output .= '<div class="checkincontainer">';
+                $output .= '</div>'; */
+                $output .= '<div class="brewerybeers_inner">';
 
-                $beer_count = $feed->response->brewery->beer_count;
-                //echo 'Beer List: <pre style="color:black;">'; var_dump($feed->response->brewery->beer_list); echo "</pre>";
-             foreach ($feed->response->brewery->beer_list->items as $i) {
+                    $beer_count = $feed->response->brewery->beer_count;
+                    //echo 'Beer List: <pre style="color:black;">'; var_dump($feed->response->brewery->beer_list); echo "</pre>";
+                    foreach ($feed->response->brewery->beer_list->items as $i) {
 
-                 //echo '<pre style="color:black;"> '; var_dump($i); echo "</pre>";
-                // if($counter <= $limit){
-                     $output .=  '<div class="beer_wrapper">';
-                         $output .= '<img src="' .$i->beer->beer_label. '" alt="' . $i->beer->beer_name . '" />';
-                          //echo '<pre style="color:black;"> '; var_dump($i->beer_label); echo "</pre>";
-                         $output .= '<h3 class="beer_name">'.$i->beer->beer_name.'</h3>';
-                         $output .= '<div class="beer_style">'.$i->beer->beer_style.'</div>';
-                         $output .= '<div class="beer_desc">'.$i->beer->beer_description.'</div>';
-                         $output .= '<div class="beer_abv">'.$i->beer->beer_abv.'% ABV </div>';
-                         $output .= '<div class="beer_ibu">'.$i->beer->beer_ibu.' IBU </div>';
-                        // $output .= '<div>is_in_production: '.$i->beer->is_in_production.'</div>';
-                     $output .= '</div>';
-                /*}
-                else{
-                    break;
-                } */
-                $counter++;
-            } // end for
-                $output .= '</div>';
+                     //echo '<pre style="color:black;"> '; var_dump($i); echo "</pre>";
+                    // if($counter <= $limit){
+                         $output .=  '<div class="beer_wrapper">';
+                            $output .= '<div class="beer_img_wrapper">';
+                                $output .= '<img src="' .$i->beer->beer_label. '" alt="' . $i->beer->beer_name . '" />';
+                            $output .= "</div>";
+                              //echo '<pre style="color:black;"> '; var_dump($i->beer_label); echo "</pre>";
+                             $output .= '<h3 class="beer_name">'.$i->beer->beer_name.'</h3>';
+                             //$output .= '<div class="beer_style">'.$i->beer->beer_style.'</div>';
+                             $output .= '<div class="beer_desc">'.$i->beer->beer_description.'</div>';
+                             $output .= '<div class="beer_abv">'.$i->beer->beer_abv.'% ABV </div>';
+                             $output .= '<div class="beer_ibu">'.$i->beer->beer_ibu.' IBU </div>';
+                            // $output .= '<div>is_in_production: '.$i->beer->is_in_production.'</div>';
+                         $output .= '</div>';
+                    /*}
+                    else{
+                        break;
+                    } */
+                        $counter++;
+                    } // end for
+                $output .= '</div>'; //brewerybeers_inner
                 $output .= '<div class="branding">';
                     $output .= '<span>Data provided by <a href="https://untappd.com">Untappd</a></span>';
                 $output .= '</div>';
-            $output .= '</div>';
+            $output .= '</div>'; //untappdbrewerybeers
         }
     } else {
         $output .= "Error getting feed. id=".$id." and feedtype = ".$feedtype;
