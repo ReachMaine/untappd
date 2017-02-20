@@ -9,6 +9,7 @@ class UTB_untappd {
     protected $_lastParsedResponse = null;
     protected $_lastRawResponse = null;
     protected $_lastRequestUri = null;
+    protected $_breweryID = '';
 
     public function __construct(array $connectArgs = array())
     {
@@ -22,6 +23,7 @@ class UTB_untappd {
 
         $this->_clientId = $connectArgs['clientId'];
         $this->_clientSecret = $connectArgs['clientSecret'];
+        $this->_breweryID = $connectArgs['breweryid'];
     }
 
     public function userFeed($username = '', $limit = '', $offset = '')
@@ -69,19 +71,18 @@ class UTB_untappd {
         return $this->TappdRequest('venue/checkins/' . $venueId, $args);
     }
 
-    public function breweryInfo($breweryId, $since = '', $offset = '', $limit = '')
+    public function breweryBeers($breweryId, $since = '', $offset = '', $limit = '')
     {
         if (empty($breweryId)) {
 
             echo 'breweryId parameter must be set and not empty';
         }
-
+        echo "BreweryId is:".$breweryId;
         $args = array(
             'since'  => $since,
             'offset' => $offset,
             'limit'  => $limit,
         );
-
         return $this->TappdRequest('brewery/info/' . $breweryId, $args);
     }
 

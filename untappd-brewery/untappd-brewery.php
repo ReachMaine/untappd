@@ -35,7 +35,6 @@ function utb_get_api_settings()
 // Brewery
 function utb_brewery_shortcode($atts) {
     extract(shortcode_atts(array(
-      "id" => '',
       "limit" => ''
     ), $atts));
     $id = get_option('utb_breweryid');
@@ -43,7 +42,16 @@ function utb_brewery_shortcode($atts) {
     echo utb_output($id,$feedtype,$limit);
 }
 
+
+// styling
+
+function DR_add_stylesheet() {
+    // Respects SSL, Style.css is relative to the current file
+    wp_register_style( 'utb-style', plugins_url('css/style.css', __FILE__) );
+    wp_enqueue_style( 'utb-style' );
+}
 /*  basic hooks */
 add_shortcode("utb_brewery", "utb_brewery_shortcode");
 
 add_action('admin_menu', 'utb_admin_actions');
+add_action( 'wp_enqueue_scripts', 'DR_add_stylesheet' );
