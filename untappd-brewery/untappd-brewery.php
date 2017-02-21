@@ -38,10 +38,21 @@ function utb_brewery_shortcode($atts) {
       "limit" => ''
     ), $atts));
     $id = get_option('utb_breweryid');
+	$display =  "title, label, desc, link";
     $feedtype = 'breweryBeers';
-    echo utb_output($id,$feedtype,$limit);
+    echo utb_output($id,$feedtype,$limit, $display);
 }
-
+// beers
+function utb_beers_shortcode($atts) {
+	extract(shortcode_atts(array(
+      "limit" => '',
+	  "display" => array('title', 'label', 'desc', 'link' ),
+    ), $atts));
+	$feedtype = 'beersFeed';
+	$id = get_option('utb_breweryid');
+	//echo "shortcode with display as".$display;
+	echo utb_output($id,$feedtype,$limit,$display);
+}
 
 // styling
 
@@ -52,6 +63,7 @@ function DR_add_stylesheet() {
 }
 /*  basic hooks */
 add_shortcode("utb_brewery", "utb_brewery_shortcode");
+add_shortcode("utb_beers", "utb_beers_shortcode");
 
 add_action('admin_menu', 'utb_admin_actions');
 add_action( 'wp_enqueue_scripts', 'DR_add_stylesheet' );
