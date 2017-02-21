@@ -1,0 +1,17 @@
+Notes/To Dos/Improvements
+
+- check if in production before displaying
+- beers in a given menu
+- how to display beer.
+
+More shortcodes to include:
+   VenueBeers
+   BeerInfo  (checkins?, ratings?)
+
+Improvements
+
+- use/honor counts
+- params for what to display:
+    for a beer (yes or know for each): title, image, desc, style, abv, ibu
+- use wp functions instead of curl
+- allow template function changes or function to display a beer - given a beer obj.
