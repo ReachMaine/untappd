@@ -1,7 +1,13 @@
 <?php
 function utb_output($id, $feedtype, $limit, $in_display){
-    $display = array_map('trim',explode(",", $in_display));
-//echo "<p>in output with id: ".$id." feedtype: ".$feedtype.' and display:'.$in_display.'</p>';
+    $output = '';
+//$output .= "<p>in output with id: ".$id." feedtype: ".$feedtype.' and display:'.$in_display.'</p>';
+    if ( is_string($in_display) && ($in_display !="") ){
+        $display = array_map('trim',explode(",", $in_display));
+    } else {
+        $display = array();
+    }
+
 //echo "display: <pre style='color:black;'>"; var_dump($display); echo "</pre>";
     $id = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $id);
     $id = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $id);
@@ -17,8 +23,10 @@ function utb_output($id, $feedtype, $limit, $in_display){
             switch ($feedtype) {
                 case 'breweryBeers':
                 case 'beersFeed':
-echo "getting the feed";
                     $feed = $Tappd->breweryBeers($id);
+                    break;
+                case 'beerFeed':
+                    $feed = $Tappd->beerFeed($id);
                     break;
             }
 
@@ -41,12 +49,12 @@ echo "getting the feed";
         $limit = 10;
     }
 
-    $output = '';
+
     $counter = 1;
 
     //print_r($feed);
 
-    //echo "feed: <pre style='color:black;'>"; var_dump($feed); echo "</pre>";
+    //echo "feed: <pre style='color:red;'>"; var_dump($feed); echo "</pre>";
     if (($id != '') && ($feed != '')) {
         switch ($feedtype) {
             case "breweryBeers" :
@@ -111,6 +119,18 @@ echo "getting the feed";
                         $output .= '</div>';
                     $output .= '</div>'; //untappdbrewerybeers
                 break;
+            case 'beerFeed':
+                $beer = $feed->response->beer;
+                $output .= '<div class="untappdbrewery beerfeed" >';
+                $output .=      '<div class="beer_inner">';
+                $output .=          '<div class="beer_style">'.$beer->beer_style.'</div>';
+                $output .=          '<div class="beer_abv">'.$beer->beer_abv.'% ABV</div>';
+                $output .=          '<div class="beer_ibu">'.$beer->beer_ibu.' IBU</div>';
+                $output .=          '<div class="beer_desc">'.$beer->beer_description.'</div>';
+                $output .=       '</div>'; //brewerybeers_inner
+                $output .= '</div>'; //untappdbrewerybeers
+                break;
+
             default:
                 $output .= "Error getting feed. id=".$id." and feedtype = ".$feedtype;
             }

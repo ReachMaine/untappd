@@ -53,7 +53,7 @@ class UTB_untappd {
             'offset' => $offset,
         );
 
-        return $this->TappdRequest('beer/checkins/' . $beerId, $args);
+        return $this->TappdRequest('beer/info/' . $beerId, $args);
     }
 
     public function venueFeed($venueId, $since = '', $offset = '', $limit = '')
