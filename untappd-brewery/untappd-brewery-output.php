@@ -75,8 +75,8 @@ function utb_output($id, $feedtype, $limit, $in_display){
                              $output .= '<h3 class="beer_name">'.$i->beer->beer_name.'</h3>';
                              //$output .= '<div class="beer_style">'.$i->beer->beer_style.'</div>';
                              $output .= '<div class="beer_desc">'.$i->beer->beer_description.'</div>';
-                             $output .= '<div class="beer_abv">'.$i->beer->beer_abv.'% ABV </div>';
-                             $output .= '<div class="beer_ibu">'.$i->beer->beer_ibu.' IBU </div>';
+                             $output .= '<div class="beer_abv">'.$i->beer->beer_abv.__('% ABV', 'untappedBrewery').'</div>';
+                             $output .= '<div class="beer_ibu">'.$i->beer->beer_ibu.__(' IBU ', 'untappedBrewery').'</div>';
                             // $output .= '<div>is_in_production: '.$i->beer->is_in_production.'</div>';
                          $output .= '</div>';
                     /*}
@@ -124,8 +124,8 @@ function utb_output($id, $feedtype, $limit, $in_display){
                 $output .= '<div class="untappdbrewery beerfeed" >';
                 $output .=      '<div class="beer_inner">';
                 $output .=          '<div class="beer_style">'.$beer->beer_style.'</div>';
-                $output .=          '<div class="beer_abv">'.$beer->beer_abv.'% ABV</div>';
-                $output .=          '<div class="beer_ibu">'.$beer->beer_ibu.' IBU</div>';
+                $output .=          '<div class="beer_abv">'.$beer->beer_abv.__('% ABV', 'untappedBrewery').'</div>';
+                $output .=          '<div class="beer_ibu">'.$beer->beer_ibu.__(' IBU ', 'untappedBrewery').'</div>';
                 $output .=          '<div class="beer_desc">'.$beer->beer_description.'</div>';
                 $output .=       '</div>'; //brewerybeers_inner
                 $output .= '</div>'; //untappdbrewerybeers
@@ -135,7 +135,6 @@ function utb_output($id, $feedtype, $limit, $in_display){
                 $output .= "Error getting feed. id=".$id." and feedtype = ".$feedtype;
             }
         }
-
 
     return $output;
 }
