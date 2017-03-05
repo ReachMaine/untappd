@@ -15,3 +15,9 @@ Improvements
     for a beer (yes or know for each): title, image, desc, style, abv, ibu
 - use wp functions instead of curl
 - allow template function changes or function to display a beer - given a beer obj.
+
+More stuff.
+- Add initial import from untapped (id, name)
+- This plugin for brewery.  Add plugin for pub (i,e venue).
+-  on single beer, show which venues beer is available?
+-

@@ -54,14 +54,25 @@ function beer_info_html( $post) {
 	wp_nonce_field( '_beer_info_nonce', 'beer_info_nonce' ); ?>
 
 	<p>More info about the beer</p>
-
+	<p>
+		<label for="beer_info_untappd_beer_id"><?php _e( 'untappd Beer ID', 'beer_info' ); ?></label><br>
+		<input type="text" name="beer_info_untappd_beer_id" id="beer_info_untappd_beer_id" value="<?php echo beer_info_get_meta( 'beer_info_untappd_beer_id' ); ?>">
+	</p>
 	<p>
 		<label for="beer_info_label_image_url"><?php _e( 'Label Image URL', 'beer_info' ); ?></label><br>
 		<input type="text" name="beer_info_label_image_url" id="beer_info_label_image_url" value="<?php echo beer_info_get_meta( 'beer_info_label_image_url' ); ?>">
 	</p>	<p>
 
 		<input type="checkbox" name="beer_info_display_label_with_title" id="beer_info_display_label_with_title" value="display-label-with-title" <?php echo ( beer_info_get_meta( 'beer_info_display_label_with_title' ) === 'display-label-with-title' ) ? 'checked' : ''; ?>>
-		<label for="beer_info_display_label_with_title"><?php _e( 'Display label next to title', 'beer_info' ); ?></label>	</p><?php
+		<label for="beer_info_display_label_with_title"><?php _e( 'Display label next to title', 'beer_info' ); ?></label>
+	</p>
+	<p>
+
+		<input type="checkbox" name="beer_info_display_label_in_archive" id="beer_info_display_label_in_archive" value="display-label-in-archive" <?php echo ( beer_info_get_meta( 'beer_info_display_label_in_archive' ) === 'display-label-in-archive' ) ? 'checked' : ''; ?>>
+		<label for="beer_info_display_label_in_archive"><?php _e( 'Display label in archive (instead of untappd thumbnail)', 'beer_info' ); ?></label>
+	</p><?php
+
+
 }
 
 function beer_info_save( $post_id ) {
@@ -75,6 +86,13 @@ function beer_info_save( $post_id ) {
 		update_post_meta( $post_id, 'beer_info_display_label_with_title', esc_attr( $_POST['beer_info_display_label_with_title'] ) );
 	else
 		update_post_meta( $post_id, 'beer_info_display_label_with_title', null );
+	if ( isset( $_POST['beer_info_display_label_in_archive'] ) )
+			update_post_meta( $post_id, 'beer_info_display_label_in_archive', esc_attr( $_POST['beer_info_display_label_in_archive'] ) );
+		else
+			update_post_meta( $post_id, 'beer_info_display_label_in_archive', null );
+	if ( isset( $_POST['beer_info_untappd_beer_id'] ) )
+		update_post_meta( $post_id, 'beer_info_untappd_beer_id', esc_attr( $_POST['beer_info_untappd_beer_id'] ) );
+
 }
 add_action( 'save_post', 'beer_info_save' );
 
