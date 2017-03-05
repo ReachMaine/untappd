@@ -8,6 +8,7 @@ Author: zig
 
 include('untappd-brewery-class.php');
 include('untappd-brewery-output.php');
+include('untappd-beer-cpt.php');
 function utb_admin() {
 	include('untappd-brewery-admin.php');
 }
