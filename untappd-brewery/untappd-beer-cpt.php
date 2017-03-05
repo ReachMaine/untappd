@@ -38,14 +38,7 @@ function beer_info_get_meta( $value ) {
 }
 
 function beer_info_add_meta_box() {
-	add_meta_box(
-		'beer_info-beer-info',
-		__( 'Beer Info', 'beer_info' ),
-		'beer_info_html',
-		'post',
-		'normal',
-		'default'
-	);
+
 	add_meta_box(
 		'beer_info-beer-info',
 		__( 'Beer Info', 'beer_info' ),
