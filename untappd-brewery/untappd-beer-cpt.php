@@ -14,6 +14,7 @@ if (!function_exists('create_beer_posttype')) {
 		      'public' => true,
 		      'has_archive' => true,
 		      'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),
+			  'menu_icon' => plugins_url('images/ales-dashicon.png', __FILE__),
 		      'rewrite' => array('slug' => 'ale'),
 		)   );
 
